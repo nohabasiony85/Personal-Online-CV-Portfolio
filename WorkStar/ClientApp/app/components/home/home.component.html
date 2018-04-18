@@ -1,0 +1,136 @@
+﻿<div class="row">
+  <div class="col-md-12  custom-row jumbotron">
+    <form class="form-horizontal" [formGroup]="profileForm" (ngSubmit)="onFormSubmit()">
+
+      <fieldset>
+        <legend>Profile Builder</legend>
+
+        <hr />
+
+        <legend>Personal Information</legend>
+
+        <div class="form-group">
+          <label for="inputfirstName" class="col-lg-2 control-label">First Name</label>
+          <div class="col-lg-7">
+            <input type="text" formControlName="firstName"
+                   id="inputfirstName" class="form-control"
+                   placeholder="First Name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputlastName" class="col-lg-2 control-label">Last Name</label>
+          <div class="col-lg-7">
+            <input type="text" formControlName="lastName"
+                   id="inputlastName" class="form-control"
+                   placeholder="Last Name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPhone" class="col-lg-2 control-label">Phone</label>
+          <div class="col-lg-7">
+            <input type="text" formControlName="phone"
+                   id="inputPhone" class="form-control"
+                   placeholder="Phone">
+          </div>
+        </div>
+        <!--- Email Block -->
+        <div class="form-group">
+          <label for="inputEmail" class="col-lg-2
+              control-label">Email</label>
+
+          <div class="col-lg-7">
+            <input type="text" class="form-control"
+                   id="inputEmail" formControlName="email"
+                   placeholder="Email">
+          </div>
+          <!-- Email error block -->
+          <div *ngIf="email.invalid && email.touched"
+               class="col-sm-3 text-danger">
+            <div *ngIf="email.errors?.required">
+              Email field can't be blank
+            </div>
+            <!--<div *ngIf="email.errors?.pattern">
+              The email id doesn't seem right
+            </div>-->
+          </div>
+        </div>
+
+        <!-- Gender Block -->
+        <div class="form-group">
+          <label for="select" class="col-lg-2 control-label">Gender</label>
+          <div class="col-lg-7">
+            <select id="select" class="form-control" formControlName="gender">
+
+              <option *ngFor="let g of genderList"
+                      [value]="g">
+                {{g}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+
+        <legend>Work Experiance</legend>
+        <button type="button" (click)="addWorkExp()" class="btn btn-success add-btn">Add</button>
+
+        <div class="form-group">
+          <div formArrayName="workExperiances"
+               *ngFor="let item of profileForm.get('workExperiances').controls; let i = index;">
+
+            <div [formGroupName]="i">
+              <div class="form-group">
+                <label for="inputtitle" class="col-lg-2 control-label">Title</label>
+                <div class="col-lg-7">
+                  <input type="text" formControlName="title"
+                         id="inputtitle" class="form-control"
+                         placeholder="Title">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputcopmany" class="col-lg-2 control-label">Company</label>
+                <div class="col-lg-7">
+                  <input type="text" formControlName="company"
+                         id="inputcopmany" class="form-control"
+                         placeholder="Company">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputexpYears" class="col-lg-2 control-label">Years OF Experiance</label>
+                <div class="col-lg-7">
+                  <input type="text" formControlName="expYears"
+                         id="inputexpYears" class="form-control"
+                         placeholder="Years Of Experiance">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputroles" class="col-lg-2 control-label">Roles</label>
+                <div class="col-lg-7">
+                  <textarea type="text" formControlName="roles"
+                            id="inputroles" class="form-control"
+                            placeholder="Roles"></textarea>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <!--- Buttons Block -->
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+            <button type="reset" class="btn btn-default">Cancel</button>
+            <button type="submit" [disabled]="!profileForm.valid" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </fieldset>
+
+    </form>
+  </div>
+</div>
